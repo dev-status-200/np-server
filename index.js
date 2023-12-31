@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const db = require("./models");
 
 const authRoutes = require('./routes/auth');
+const tourRoutes = require('./routes/tours');
 //const {Sub_Accounts} = require('./functions/Associations/accountAssociations')
 
 app.use(morgan('tiny'));
@@ -16,9 +17,10 @@ app.use(bodyParser.json({limit: '100mb', extended: true}));
 app.use(express.json());
 db.sequelize.sync();
 
-app.get("/", (req, res) => { res.json('DGM Server') });
+app.get("/", (req, res) => { res.json('TNP Server') });
 //app.get("/getUser", verify, (req, res) => { res.json({isLoggedIn:true, username:req.body.username}) });
 app.use("/auth", authRoutes);
+app.use("/packages", tourRoutes);
 
 const PORT = process.env.PORT || 8080;
 
